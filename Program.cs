@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Worms_lab.services;
 using Worms_lab.Strategies;
 
 namespace Worms_lab
@@ -10,10 +10,21 @@ namespace Worms_lab
         public Position Position { get; private set; }
         static void Main(string[] args)
         {
-            StreamWriter streamWiter = new StreamWriter("log.txt");
-            new World(streamWiter).Live();   
-            streamWiter.Close();
+            CreateHostBuilder(args).Build().Run();
+        }
 
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            return Host.CreateDefaultBuilder(args)
+
+                .ConfigureServices((hostContext, services) =>
+                {
+                    services.AddHostedService<WorldSimulator>();
+                    services.AddScoped<NameGenerator>();
+                    services.AddScoped<FoodGenerator>();
+                    services.AddScoped(sp => new WorldStateWriter(hostContext.Configuration.GetSection("WorldStateFileName").Value));
+                    services.AddScoped<IBehaviorStrategy, CleverMoveStrategy>();
+                });
         }
     }
 

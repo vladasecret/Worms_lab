@@ -8,7 +8,7 @@ namespace Worms_lab.services
 {
     class NameGenerator
     {
-        private static int nameGenerated = 0;
+        private int nameGenerated = 0;
         private static string[] prefix = new string[] {
             "Ael", "Aer", "Af", "Ah", "Al", "Am", "Ama", "An", "Ang", "Ansr", "Ar", 
             "Ar", "Arn", "Aza", "Bael", "Bes", "Cael", "Cal", "Cas", "Cla", "Cor",
@@ -36,7 +36,7 @@ namespace Worms_lab.services
             "yr", "yn", "yth", "zair", "zara"
         };
 
-        public static string GenerateName()
+        public string GenerateName()
         {
             int prefixIdx = nameGenerated % prefix.Length;
             int suffixIdx = nameGenerated / prefix.Length % suffix.Length;

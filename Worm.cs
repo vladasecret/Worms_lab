@@ -7,22 +7,24 @@ namespace Worms_lab
     {
         public string Name { get; init; }
         public int Health { get; private set; }
-        public Position Position { get; private set; }
+        public Position Position { get; private set;}
+
+        public WorldSimulator World { get; private set;}
 
         private readonly IBehaviorStrategy strategy;
-        public (Direction Direction, bool Split)? Intention { get; private set; }
-
-        public Worm(IBehaviorStrategy strategy, Position pos = new Position())
+        
+        public Worm(WorldSimulator world, IBehaviorStrategy strategy, string name, Position pos = new Position())
         {
             Position = pos;
             Health = 10;
-            Name = NameGenerator.GenerateName();
+            Name = name;
             this.strategy = strategy;
+            World = world;
         }
 
-        public void makeIntention()
+        public (Direction direction, bool split)? GetIntention()
         {
-            Intention = strategy.GetIntention(this);
+            return strategy.GetIntention(this);
         }
 
         public void Step(Direction dir)
@@ -34,10 +36,10 @@ namespace Worms_lab
         {
             Health += 10;
         }
-        public Worm Split(Direction dir)
+        public Worm Split(Direction dir, string name)
         {
             Health -= 10;
-            return new Worm(strategy, Position + dir.GetPosition());
+            return new Worm(World, strategy, name, Position + dir.GetPosition());
         }
 
         public void UpdateHealth()

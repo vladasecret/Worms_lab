@@ -7,13 +7,18 @@ using System.Threading.Tasks;
 
 namespace Worms_lab
 {
-    class WorldLogger
+    class WorldStateWriter : IDisposable
     {
-        private StreamWriter streamWriter;
+        private readonly StreamWriter streamWriter;
 
-        public WorldLogger(StreamWriter writer) 
+        public WorldStateWriter(string outputFileName) 
         {
-            streamWriter = writer;
+            streamWriter = new StreamWriter(outputFileName);
+        }
+
+        public void Dispose()
+        {
+            streamWriter.Close();
         }
 
         public void Log(List<Worm> worms, List<Food> food)

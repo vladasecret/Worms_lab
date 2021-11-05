@@ -9,12 +9,6 @@ namespace Worms_lab.Strategies
 {
     class CleverMoveStrategy : IBehaviorStrategy
     {
-        private readonly World world;
-
-        public CleverMoveStrategy(World world)
-        {
-            this.world = world;
-        }
 
         public (Direction Direction, bool Split)? GetIntention(Worm worm)
         {
@@ -23,13 +17,13 @@ namespace Worms_lab.Strategies
             Food nearestFood = GetNearestFood(worm);
             if (nearestFood == null)
                 return null;
-            return (GetDirectionToFood(worm.Position, nearestFood.Position), false);
-        }
+            return (GetDirectionToFood(worm, nearestFood.Position), false);
+        } 
 
         private Food GetNearestFood(Worm worm)
         {
 
-            var foodList = world.GetFood();
+            var foodList = worm.World.GetFood();
             Food nearestFood = null;
             int minDist = int.MaxValue;
             foreach (var food in foodList)
@@ -44,21 +38,9 @@ namespace Worms_lab.Strategies
             return nearestFood;
         }
 
-        private int FoodAmountNearby(int distance, Position wormPos)
+        private Direction GetDirectionToFood(Worm worm, Position foodPosition)
         {
-            var foodList = world.GetFood();
-            int res = 0;
-            foreach (var food in foodList)
-            {
-                int dist = food.Position.Distance(wormPos);
-                if (dist <= distance && dist >= food.Freshness)
-                    res++;
-            }
-            return res;
-        }
-
-        private Direction GetDirectionToFood(Position wormPosition, Position foodPosition)
-        {
+            Position wormPosition = worm.Position;
             if (wormPosition.X == foodPosition.X)
             {
                 return (wormPosition.Y < foodPosition.Y) ? Direction.UP : Direction.DOWN;
@@ -68,7 +50,7 @@ namespace Worms_lab.Strategies
                 return (wormPosition.X < foodPosition.X) ? Direction.RIGHT : Direction.LEFT;
             }
             Direction dir = (wormPosition.X < foodPosition.X) ? Direction.RIGHT : Direction.LEFT;
-            if (world.IsWorm(dir.GetPosition() + wormPosition))
+            if (worm.World.IsWorm(dir.GetPosition() + wormPosition))
             {
                 dir = (wormPosition.Y < foodPosition.Y) ? Direction.UP : Direction.DOWN;
             }
