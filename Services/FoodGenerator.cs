@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Worms_lab.services
 {
-    class FoodGenerator
+    public class FoodGenerator
     {
         private readonly Random random;
 
@@ -16,13 +16,13 @@ namespace Worms_lab.services
             random = new Random();
         }
 
-        public Food Generate(WorldSimulator world)
+        public Food Generate(ReadOnlyState state)
         {
             Position position;
             do
             {
                 position = new Position(random.NextNormal(0, 5));
-            } while (world.IsFood(position));
+            } while (state.IsFood(position));
             return new Food(position);
         }
     }

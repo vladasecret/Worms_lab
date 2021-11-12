@@ -3,23 +3,23 @@ using Worms_lab.Strategies;
 
 namespace Worms_lab
 {
-    class Worm
+    public class Worm
     {
         public string Name { get; init; }
         public int Health { get; private set; }
         public Position Position { get; private set;}
 
-        public WorldSimulator World { get; private set;}
+        public ReadOnlyState WorldState { get; private set;}
 
         private readonly IBehaviorStrategy strategy;
         
-        public Worm(WorldSimulator world, IBehaviorStrategy strategy, string name, Position pos = new Position())
+        public Worm(ReadOnlyState state, IBehaviorStrategy strategy, string name, Position pos = new Position())
         {
             Position = pos;
             Health = 10;
             Name = name;
             this.strategy = strategy;
-            World = world;
+            WorldState = state;
         }
 
         public (Direction direction, bool split)? GetIntention()
@@ -39,7 +39,7 @@ namespace Worms_lab
         public Worm Split(Direction dir, string name)
         {
             Health -= 10;
-            return new Worm(World, strategy, name, Position + dir.GetPosition());
+            return new Worm(WorldState, strategy, name, Position + dir.GetPosition());
         }
 
         public void UpdateHealth()

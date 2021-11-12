@@ -12,59 +12,46 @@ using System.Threading;
 
 namespace Worms_lab
 {
-    class WorldSimulator :IHostedService
-    {        
-        private readonly List<Worm> worms = new List<Worm>();
-        private readonly List<Food> food = new List<Food>();
+    public class WorldSimulator
+    {
+        private WorldState state;
 
         private readonly WorldStateWriter stateWriter;
         private readonly FoodGenerator foodGenerator;
         private readonly NameGenerator nameGenerator;
 
-        public WorldSimulator(IBehaviorStrategy strategy, WorldStateWriter writer, FoodGenerator foodGenerator, NameGenerator nameGenerator)
+        public WorldSimulator(WorldStateWriter writer, FoodGenerator foodGenerator, NameGenerator nameGenerator)
         {
             stateWriter = writer;
             this.foodGenerator = foodGenerator;
             this.nameGenerator = nameGenerator;
-            worms.Add(new Worm(this, strategy, nameGenerator.GenerateName()));
         }
 
-       
-        public ReadOnlyCollection<Worm> GetWorms()
+        public void InitState(WorldState state)
         {
-            return worms.AsReadOnly();
+            this.state = state;
         }
 
-        public ReadOnlyCollection<Food> GetFood()
-        {
-            return food.AsReadOnly();
-        }
-
-        public void Live()
+        public void MakeStep()
         {
             List<Worm> newWorms = new();
-            for (int i = 0; i < 100; ++i)
+
+            GenerateFood();
+            ValidateIntentions(newWorms);
+            state.UpdateFood();
+            state.UpdateWorms();
+            if (newWorms.Count != 0)
             {
-                GenerateFood();
-                stateWriter.Log(worms, food);
-                ValidateIntentions(newWorms);
-                UpdateFood();
-                UpdateWorms();
-                if (newWorms.Count != 0)
-                {
-                    worms.AddRange(newWorms);
-                    newWorms.Clear();
-                }
+                state.Worms.AddRange(newWorms);
+                newWorms.Clear();
             }
-            stateWriter.Log(worms, food);
+            stateWriter.Log(state);
         }
 
-        
-
-        private void ValidateIntentions(List<Worm> newWorms)
+        public void ValidateIntentions(List<Worm> newWorms)
         {
             (Direction direction, bool split)? intention;
-            foreach (var worm in worms)
+            foreach (var worm in state.Worms)
             {
                 intention = worm.GetIntention();
                 if (intention.HasValue)
@@ -74,12 +61,12 @@ namespace Worms_lab
                         case false:
                             {
                                 Position pos = worm.Position + intention.Value.direction.GetPosition();
-                                if (IsWorm(pos))
+                                if (state.IsWorm(pos))
                                     break;
-                                if (IsFood(pos, out Food food))
+                                if (state.IsFood(pos, out Food food))
                                 {
                                     worm.EatFood();
-                                    this.food.Remove(food);
+                                    state.Food.Remove(food);
                                 }
                                 worm.Step(intention.Value.direction);
                                 break;
@@ -88,7 +75,7 @@ namespace Worms_lab
                         case true:
                             {
                                 Position pos = worm.Position + intention.Value.direction.GetPosition();
-                                if (worm.Health < 11 || IsFood(pos) || IsWorm(pos))
+                                if (worm.Health < 11 || state.IsFood(pos) || state.IsWorm(pos))
                                     break;
                                 newWorms.Add(worm.Split(intention.Value.direction, nameGenerator.GenerateName()));
                                 break;
@@ -100,57 +87,14 @@ namespace Worms_lab
 
         }
 
-
-        public bool IsWorm(Position position)
-        {
-            return worms.Exists(worm => worm.Position.Equals(position));
-        }
-
-        private bool IsWorm(Position position, out Worm worm)
-        {
-            worm = worms.Find(worm => worm.Position.Equals(position));
-            return worm != null;
-        }
-        public bool IsFood(Position position)
-        {
-            return food.Exists(item => item.Position.Equals(position));
-        }
-
-        private bool IsFood(Position position, out Food foodItem)
-        {
-            foodItem = food.Find(item => item.Position.Equals(position));
-            return foodItem != null;
-        }
-
         public void GenerateFood()
         {
-            Food foodItem = foodGenerator.Generate(this);
+            Food foodItem = foodGenerator.Generate(state.AsReadOnly());
 
-            if (IsWorm(foodItem.Position, out Worm worm))
+            if (state.IsWorm(foodItem.Position, out Worm worm))
                 worm.EatFood();
-            else food.Add(foodItem);
-        }
-        
-        private void UpdateFood()
-        {
-            food.RemoveAll(item => { item.updateFreshness(); return item.Freshness == 0;});
+            else state.Food.Add(foodItem);
         }
 
-        private void UpdateWorms()
-        {
-            worms.RemoveAll(item => { item.UpdateHealth(); return item.Health == 0; });
-        }
-
-        public Task StartAsync(CancellationToken cancellationToken)
-        {
-            
-            Task.Run(()=>Live());
-            return Task.CompletedTask;
-        }
-
-        public Task StopAsync(CancellationToken cancellationToken)
-        {
-            return Task.CompletedTask;
-        }
-    } 
+    }
 }

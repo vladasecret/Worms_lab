@@ -23,16 +23,15 @@ namespace Worms_lab.Strategies
         private Food GetNearestFood(Worm worm)
         {
 
-            var foodList = worm.World.GetFood();
             Food nearestFood = null;
             int minDist = int.MaxValue;
-            foreach (var food in foodList)
+            foreach (var foodItem in worm.WorldState.Food)
             {
-                int dist = food.Position.Distance(worm.Position);
-                if (food.Freshness >= dist && worm.Health >= dist && minDist > dist)
+                int dist = foodItem.Position.Distance(worm.Position);
+                if (foodItem.Freshness >= dist && worm.Health >= dist && minDist > dist)
                 {
                     minDist = dist;
-                    nearestFood = food;
+                    nearestFood = foodItem;
                 }
             }
             return nearestFood;
@@ -50,7 +49,7 @@ namespace Worms_lab.Strategies
                 return (wormPosition.X < foodPosition.X) ? Direction.RIGHT : Direction.LEFT;
             }
             Direction dir = (wormPosition.X < foodPosition.X) ? Direction.RIGHT : Direction.LEFT;
-            if (worm.World.IsWorm(dir.GetPosition() + wormPosition))
+            if (worm.WorldState.IsWorm(dir.GetPosition() + wormPosition))
             {
                 dir = (wormPosition.Y < foodPosition.Y) ? Direction.UP : Direction.DOWN;
             }

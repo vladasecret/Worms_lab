@@ -19,11 +19,12 @@ namespace Worms_lab
 
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<WorldSimulator>();
-                    services.AddScoped<NameGenerator>();
-                    services.AddScoped<FoodGenerator>();
-                    services.AddScoped(sp => new WorldStateWriter(hostContext.Configuration.GetSection("WorldStateFileName").Value));
-                    services.AddScoped<IBehaviorStrategy, CleverMoveStrategy>();
+                    services.AddHostedService<WorldSimulatorService>();
+                    services.AddSingleton<WorldSimulator>();
+                    services.AddSingleton<NameGenerator>();
+                    services.AddSingleton<FoodGenerator>();
+                    services.AddSingleton(sp => new WorldStateWriter(hostContext.Configuration.GetSection("WorldStateFileName").Value));
+                    services.AddSingleton<IBehaviorStrategy, CleverMoveStrategy>();
                 });
         }
     }

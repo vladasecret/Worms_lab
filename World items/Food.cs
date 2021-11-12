@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Worms_lab
 {
-    class Food
+    public class Food
     {
         public Position Position { get; private set;}
 

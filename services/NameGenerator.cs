@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Worms_lab.services
 {
-    class NameGenerator
+    public class NameGenerator
     {
         private int nameGenerated = 0;
-        private static string[] prefix = new string[] {
+        private static readonly string[] prefix = new string[] {
             "Ael", "Aer", "Af", "Ah", "Al", "Am", "Ama", "An", "Ang", "Ansr", "Ar", 
             "Ar", "Arn", "Aza", "Bael", "Bes", "Cael", "Cal", "Cas", "Cla", "Cor",
             "Cy", "Dae", "Dho", "Dre", "Du", "Eil", "Eir", "El", "Er", "Ev", "Fera",

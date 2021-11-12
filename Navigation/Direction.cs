@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Worms_lab
 {
-    enum Direction
+    public enum Direction
     {
         UP,
         RIGHT,
@@ -14,7 +14,7 @@ namespace Worms_lab
         LEFT
     }
 
-    static class DirectionExtension
+    public static class DirectionExtension
     {
         public static Direction GetRandomDirection()
         {
