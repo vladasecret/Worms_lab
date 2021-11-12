@@ -22,7 +22,7 @@ namespace Worms_lab
                     services.AddHostedService<WorldSimulatorService>();
                     services.AddSingleton<WorldSimulator>();
                     services.AddSingleton<NameGenerator>();
-                    services.AddSingleton<FoodGenerator>();
+                    services.AddScoped<FoodGenerator>();
                     services.AddSingleton(sp => new WorldStateWriter(hostContext.Configuration.GetSection("WorldStateFileName").Value));
                     services.AddSingleton<IBehaviorStrategy, CleverMoveStrategy>();
                 });

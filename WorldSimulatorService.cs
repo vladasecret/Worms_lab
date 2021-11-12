@@ -16,13 +16,16 @@ namespace Worms_lab
         private readonly WorldSimulator simulator;
         private readonly IBehaviorStrategy strategy;
         private readonly NameGenerator nameGenerator;
+        private readonly IHostApplicationLifetime appLifetime;
         private int stepNum; 
 
-        public WorldSimulatorService(WorldSimulator simulator, IBehaviorStrategy strategy, NameGenerator nameGenerator)
+        public WorldSimulatorService(WorldSimulator simulator, IBehaviorStrategy strategy, NameGenerator nameGenerator, 
+            IHostApplicationLifetime appLifetime)
         {
             this.strategy = strategy;
             this.simulator = simulator;
             this.nameGenerator = nameGenerator;
+            this.appLifetime = appLifetime;
         }
         public Task StartAsync(CancellationToken cancellationToken)
         {
@@ -35,6 +38,7 @@ namespace Worms_lab
                 {
                     simulator.MakeStep();
                 }
+                appLifetime.StopApplication();
             });
             return Task.CompletedTask;
         }

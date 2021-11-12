@@ -1,7 +1,7 @@
 ﻿
 namespace Worms_lab.Strategies
 {
-    interface IBehaviorStrategy
+    public interface IBehaviorStrategy
     {
         (Direction Direction, bool Split)? GetIntention(Worm worm);
     }
