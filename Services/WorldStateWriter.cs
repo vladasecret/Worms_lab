@@ -5,15 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worms_lab
+namespace Worms_lab.Services
 {
     public class WorldStateWriter : IDisposable
     {
-        private readonly StreamWriter streamWriter;
+        private readonly TextWriter streamWriter;
 
+        public WorldStateWriter(TextWriter writer)
+        {
+            streamWriter = writer;
+        }
         public WorldStateWriter(string outputFileName) 
         {
-            if (String.IsNullOrEmpty(outputFileName))
+            if (string.IsNullOrEmpty(outputFileName))
                 outputFileName = "log.txt";
             streamWriter = new StreamWriter(outputFileName);
         }

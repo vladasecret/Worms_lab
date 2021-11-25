@@ -18,6 +18,12 @@ namespace Worms_lab
             Freshness = 10;
         }
 
+        public Food(Position pos, int freshness)
+        {
+            Position = pos;
+            Freshness = freshness;
+        }
+
         public void updateFreshness()
         {
             Freshness--;

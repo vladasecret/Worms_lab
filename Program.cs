@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Worms_lab.services;
+using Worms_lab.Services;
 using Worms_lab.Strategies;
 
 namespace Worms_lab
@@ -22,7 +22,7 @@ namespace Worms_lab
                     services.AddHostedService<WorldSimulatorService>();
                     services.AddSingleton<WorldSimulator>();
                     services.AddSingleton<NameGenerator>();
-                    services.AddScoped<FoodGenerator>();
+                    services.AddScoped<IFoodGenerator, NormalFoodGenerator>();
                     services.AddSingleton(sp => new WorldStateWriter(hostContext.Configuration.GetSection("WorldStateFileName").Value));
                     services.AddSingleton<IBehaviorStrategy, CleverMoveStrategy>();
                 });

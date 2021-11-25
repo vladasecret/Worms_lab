@@ -44,7 +44,7 @@ namespace Worms_lab
 
         public void UpdateWorms()
         {
-            Worms.RemoveAll(item => { item.UpdateHealth(); return item.Health == 0; });
+            Worms.RemoveAll(item => item.Health == 0 );
         }
 
         public ReadOnlyState AsReadOnly()

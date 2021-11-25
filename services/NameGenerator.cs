@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worms_lab.services
+namespace Worms_lab.Services
 {
     public class NameGenerator
     {
         private int nameGenerated = 0;
         private static readonly string[] prefix = new string[] {
             "Ael", "Aer", "Af", "Ah", "Al", "Am", "Ama", "An", "Ang", "Ansr", "Ar", 
-            "Ar", "Arn", "Aza", "Bael", "Bes", "Cael", "Cal", "Cas", "Cla", "Cor",
+            "Arn", "Aza", "Bael", "Bes", "Cael", "Cal", "Cas", "Cla", "Cor",
             "Cy", "Dae", "Dho", "Dre", "Du", "Eil", "Eir", "El", "Er", "Ev", "Fera",
             "Fi", "Fir", "Fis", "Gael", "Gar", "Gil", "Ha", "Hu", "Ia", "Il", "Ja",
             "Jar", "Ka", "Kan", "Ker", "Keth", "Koeh", "Kor", "Ky", "La", "Laf", "Lam",
@@ -22,18 +22,18 @@ namespace Worms_lab.services
                     };
         private static readonly string[] suffix = new string[]
         {
-            "ae", "ael", "aer", "aera", "aias", "aia", "ah", "aha", "aith", "aira", "al",
-            "ala",  "ali", "am", "ama", "an", "ana",  "ar", "ara",  "ari",  "aro",  "as",
-            "avel", "brar",  "dar",  "deth", "dre","drim",  "dul", "ean", "el",  "ela","emar",
-            "en", "er",  "ess",  "evar", "fel", "hal",  "har",  "hel",  "ian", "ianna",
-            "iat", "ik", "il",  "im", "in",  "ir",  "is", "ith",  "kash",  "ki", "lan",
-            "lanna",  "lam",  "lar",  "las", "lian", "lia", "lis",  "lon",  "lyn", "mah",
-            "ma",  "mil",  "mus", "nal",  "nes", "nin",  "nis",  "on","onna","or", "oth",
-            "que", "quis","rah", "rad", "rail","ria",  "ran",  "reth",  "ro",  "ruil",  "sal",
-            "san", "sar", "sel",  "sha",  "spar", "tae",  "tas",  "ten",  "thal", "tha",
-            "thar",  "ther",  "thi", "thus", "thas",  "ti",  "tril", "tria",  "ual",  "uath",
-            "us", "ua", "van", "vanna", "var", "vara",  "vain",  "via",  "vin",  "wyn", "ya",
-            "yr", "yn", "yth", "zair", "zara"
+            "Ae", "Ael", "Aer", "Aera", "Aias", "Aia", "Ah", "Aha", "Aith", "Aira", "Al",
+            "Ala",  "Ali", "Am", "Ama", "An", "Ana",  "Ar", "Ara",  "Ari",  "Aro",  "As",
+            "Avel", "Brar",  "Dar",  "Deth", "Dre","Drim",  "Dul", "Ean", "El",  "Ela","Emar",
+            "En", "Er",  "Ess",  "Evar", "Fel", "Hal",  "Har",  "Hel",  "Ian", "Ianna",
+            "Iat", "Ik", "Il",  "Im", "In",  "Ir",  "Is", "Ith",  "Kash",  "Ki", "Lan",
+            "Lanna",  "Lam",  "Lar",  "Las", "Lian", "Lia", "Lis",  "Lon",  "Lyn", "Mah",
+            "Ma",  "Mil",  "Mus", "Nal",  "Nes", "Nin",  "Nis",  "On","Onna","Or", "Oth",
+            "Que", "Quis","Rah", "Rad", "Rail","Ria",  "Ran",  "Reth",  "Ro",  "Ruil",  "Sal",
+            "San", "Sar", "Sel",  "Sha",  "Spar", "Tae",  "Tas",  "Ten",  "Thal", "Tha",
+            "Thar",  "Ther",  "Thi", "Thus", "Thas",  "Ti",  "Tril", "Tria",  "Ual",  "Uath",
+            "Us", "Ua", "Van", "Vanna", "Var", "Vara",  "Vain",  "Via",  "Vin",  "Wyn", "Ya",
+            "Yr", "Yn", "Yth", "Zair", "Zara"
         };
 
         public string GenerateName()
@@ -41,7 +41,7 @@ namespace Worms_lab.services
             int prefixIdx = nameGenerated % prefix.Length;
             int suffixIdx = nameGenerated / prefix.Length % suffix.Length;
             int circle = nameGenerated / (prefix.Length * suffix.Length);
-            string name = $"{prefix[prefixIdx]}{suffix[suffixIdx]}{(circle > 0 ? circle : null)}";
+            string name = $"{prefix[prefixIdx]}-{suffix[suffixIdx]}{(circle > 0 ? circle : null)}";
             nameGenerated++;
             return name;
         }

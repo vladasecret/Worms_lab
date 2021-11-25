@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Worms_lab.services
+namespace Worms_lab.Services
 {
-    public class FoodGenerator
+    public class NormalFoodGenerator : IFoodGenerator
     {
         private readonly Random random;
 
-        public FoodGenerator()
+        public NormalFoodGenerator()
         {
             random = new Random();
         }

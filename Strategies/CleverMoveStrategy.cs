@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Worms_lab.Strategies
 {
-    class CleverMoveStrategy : IBehaviorStrategy
+    public class CleverMoveStrategy : IBehaviorStrategy
     {
 
         public (Direction Direction, bool Split)? GetIntention(Worm worm)

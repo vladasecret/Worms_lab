@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Worms_lab.Strategies;
-using Worms_lab.services;
+using Worms_lab.Services;
 using System.Collections.ObjectModel;
 using Microsoft.Extensions.Hosting;
 using System.Threading;
@@ -17,10 +17,10 @@ namespace Worms_lab
         private WorldState state;
 
         private readonly WorldStateWriter stateWriter;
-        private readonly FoodGenerator foodGenerator;
+        private readonly IFoodGenerator foodGenerator;
         private readonly NameGenerator nameGenerator;
 
-        public WorldSimulator(WorldStateWriter writer, FoodGenerator foodGenerator, NameGenerator nameGenerator)
+        public WorldSimulator(WorldStateWriter writer, IFoodGenerator foodGenerator, NameGenerator nameGenerator)
         {
             stateWriter = writer;
             this.foodGenerator = foodGenerator;
@@ -34,22 +34,17 @@ namespace Worms_lab
 
         public void MakeStep()
         {
-            List<Worm> newWorms = new();
-
+            
             GenerateFood();
-            ValidateIntentions(newWorms);
+            ValidateIntentions();
             state.UpdateFood();
             state.UpdateWorms();
-            if (newWorms.Count != 0)
-            {
-                state.Worms.AddRange(newWorms);
-                newWorms.Clear();
-            }
             stateWriter.Log(state);
         }
 
-        public void ValidateIntentions(List<Worm> newWorms)
+        public void ValidateIntentions()
         {
+            List<Worm> newWorms = new List<Worm>();
             (Direction direction, bool split)? intention;
             foreach (var worm in state.Worms)
             {
@@ -83,8 +78,12 @@ namespace Worms_lab
 
                     }
                 }
+                worm.UpdateHealth();
             }
-
+            if (newWorms.Count != 0)
+            {
+                state.Worms.AddRange(newWorms);
+            }
         }
 
         public void GenerateFood()
