@@ -21,6 +21,10 @@ namespace WormsTest.DbBehaviorTests
         protected void SeedData()
         {
             using var context = ContextFactory.CreateDbContext();
+
+            context.Database.EnsureDeleted();
+            context.Database.EnsureCreated();
+
             Behavior behavior = new() { BehaviorSteps = new(), Name = behaviorName };
 
             for (int i = 1; i < 5; ++i)
