@@ -1,8 +1,8 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using Worms_lab;
-using Worms_lab.Services;
+using Worms_lab.Simulator;
+using Worms_lab.Simulator.Services;
 
 namespace WormsTest
 {
@@ -15,7 +15,7 @@ namespace WormsTest
             WorldState state = new();
             var roState = state.AsReadOnly();
             HashSet<Position> set = new();
-            var generator = new NormalFoodGenerator();
+            var generator = new NormalFoodGeneratorService();
             for (int i = 0; i < num; ++i)
             {
                 Food tmp = generator.Generate(roState);

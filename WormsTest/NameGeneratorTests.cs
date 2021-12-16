@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
-using Worms_lab.Services;
+using Worms_lab.Simulator.Services;
 
 namespace WormsTest
 {
@@ -11,7 +11,7 @@ namespace WormsTest
         [TestCase(15000)]
         public void UniqueNames(int num)
         {
-            var generator = new NameGenerator();
+            var generator = new NameGeneratorService();
             HashSet<string> names = new();
             for (int i = 0; i < num; ++i)
             {

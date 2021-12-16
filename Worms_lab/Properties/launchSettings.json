@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Worms_lab": {
+      "commandName": "Project",
+      "commandLineArgs": "behavior1"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Worms_lab.BehGen": {
+      "commandName": "Project",
+      "commandLineArgs": "behavior3"
+    }
+  }
+}

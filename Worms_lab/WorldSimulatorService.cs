@@ -1,12 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Worms_lab.Services;
-using Worms_lab.Strategies;
+using Worms_lab.Simulator;
+using Worms_lab.Simulator.Services;
+using Worms_lab.Simulator.Strategies;
 
 namespace Worms_lab
 {
@@ -15,11 +12,11 @@ namespace Worms_lab
 
         private readonly WorldSimulator simulator;
         private readonly IBehaviorStrategy strategy;
-        private readonly NameGenerator nameGenerator;
+        private readonly NameGeneratorService nameGenerator;
         private readonly IHostApplicationLifetime appLifetime;
         private int stepNum; 
 
-        public WorldSimulatorService(WorldSimulator simulator, IBehaviorStrategy strategy, NameGenerator nameGenerator, 
+        public WorldSimulatorService(WorldSimulator simulator, IBehaviorStrategy strategy, NameGeneratorService nameGenerator, 
             IHostApplicationLifetime appLifetime)
         {
             this.strategy = strategy;

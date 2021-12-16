@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Worms_lab;
-using Worms_lab.Strategies;
+using Worms_lab.Simulator;
+using Worms_lab.Simulator.Strategies;
 
 
 namespace WormsTest

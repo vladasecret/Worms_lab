@@ -2,16 +2,16 @@ using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Worms_lab;
-using Worms_lab.Services;
-using Worms_lab.Strategies;
+using Worms_lab.Simulator;
+using Worms_lab.Simulator.Services;
+using Worms_lab.Simulator.Strategies;
 
 namespace WormsTest
 {
     public class WorldSimulatorTests
     {
         private WorldSimulator simulator = 
-            new WorldSimulator(new WorldStateWriter(Console.Out), new NormalFoodGenerator(), new NameGenerator());
+            new WorldSimulator(new WorldStateWriterService(Console.Out), new NormalFoodGeneratorService(), new NameGeneratorService());
 
 
         [Test]
@@ -173,8 +173,8 @@ namespace WormsTest
             WorldState state = new WorldState();
             Worm worm = new Worm(state.AsReadOnly(), stabBehavior, "Bob");
             state.Worms.Add(worm);
-            var foodGenerator = Mock.Of<IFoodGenerator>(fg => fg.Generate(It.IsAny<ReadOnlyState>()) == new Food(new Position()));
-            var simulator = new WorldSimulator(new WorldStateWriter(Console.Out), foodGenerator, new NameGenerator());
+            var foodGenerator = Mock.Of<IFoodGeneratorService>(fg => fg.Generate(It.IsAny<ReadOnlyState>()) == new Food(new Position()));
+            var simulator = new WorldSimulator(new WorldStateWriterService(Console.Out), foodGenerator, new NameGeneratorService());
             simulator.InitState(state);
 
             simulator.MakeStep();
