@@ -31,6 +31,15 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
+              "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\Worms_lab.BehaviorLoading.csproj": {
+                "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\Worms_lab.BehaviorLoading.csproj"
+              },
+              "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_Lab.Data\\Worms_lab.Data.csproj": {
+                "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_Lab.Data\\Worms_lab.Data.csproj"
+              },
+              "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.DBAware\\Worms_lab.DBAware.csproj": {
+                "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.DBAware\\Worms_lab.DBAware.csproj"
+              },
               "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab\\Worms_lab.csproj": {
                 "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab\\Worms_lab.csproj"
               }
@@ -47,6 +56,10 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[5.0.12, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.9.4, )"
@@ -68,6 +81,67 @@
               "version": "[3.0.2, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\Worms_lab.BehaviorLoading.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\Worms_lab.BehaviorLoading.csproj",
+        "projectName": "Worms_lab.BehaviorLoading",
+        "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\Worms_lab.BehaviorLoading.csproj",
+        "packagesPath": "C:\\Users\\vlada\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\vlada\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_Lab.Data\\Worms_lab.Data.csproj": {
+                "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_Lab.Data\\Worms_lab.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "imports": [
             "net461",
             "net462",

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Worms_lab.Simulator;
 using Worms_lab.Simulator.Services;
 
-namespace WormsTest
+namespace WormsTest.SimulatorTests
 {
     class NormalFoodGeneratorTests
     {

@@ -22,7 +22,7 @@ namespace Worms_lab.DBAware
                 .Select(bs => new Food(new Position(bs.X, bs.Y)))
                 .FirstOrDefault();
             if (food == null)
-                throw new ArgumentException($"step {stepNumber} does not exist");
+                throw new ArgumentException($"Step {stepNumber} does not exists.");
             return food;
         }
 
@@ -33,8 +33,10 @@ namespace Worms_lab.DBAware
                 .Where(behavior => behavior.Name.Equals(behaviorName))
                 .Include(b => b.BehaviorSteps).FirstOrDefault();
             if (behavior == null)
-                throw new ArgumentException($"Behavior with name \"{behaviorName}\" does not exist");
+                throw new ArgumentException($"Behavior with name \"{behaviorName}\" does not exists");
             steps = behavior.BehaviorSteps;
         }
+
+        
     }
 }

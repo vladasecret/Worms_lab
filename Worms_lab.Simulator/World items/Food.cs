@@ -29,6 +29,17 @@ namespace Worms_lab.Simulator
             Freshness--;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (base.Equals(obj))
+                return true;
+            if (obj is Food)
+            {
+                var food = (Food)obj;
+                return food.Position.Equals(Position);
+            }
+            return false;
+        }
         public override string ToString()
         {
             //return Position.ToString();

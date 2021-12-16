@@ -6,7 +6,7 @@ using Worms_lab.Simulator;
 using Worms_lab.Simulator.Services;
 using Worms_lab.Simulator.Strategies;
 
-namespace WormsTest
+namespace WormsTest.SimulatorTests
 {
     public class WorldSimulatorTests
     {

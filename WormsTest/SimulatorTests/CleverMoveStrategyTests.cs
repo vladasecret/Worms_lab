@@ -4,7 +4,7 @@ using Worms_lab.Simulator;
 using Worms_lab.Simulator.Strategies;
 
 
-namespace WormsTest
+namespace WormsTest.SimulatorTests
 {
     class CleverMoveStrategyTests
     {

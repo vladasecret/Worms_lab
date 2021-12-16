@@ -175,6 +175,18 @@
           "lib/netstandard2.0/_._": {}
         }
       },
+      "Microsoft.EntityFrameworkCore.InMemory/5.0.12": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "5.0.12"
+        },
+        "compile": {
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore.Relational/5.0.12": {
         "type": "package",
         "dependencies": {
@@ -2510,6 +2522,19 @@
           "bin/placeholder/Worms_lab.dll": {}
         }
       },
+      "Worms_lab.BehaviorLoading/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Worms_lab.Data": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Worms_lab.BehaviorLoading.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Worms_lab.BehaviorLoading.dll": {}
+        }
+      },
       "Worms_lab.Data/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
@@ -2899,6 +2924,20 @@
         "lib/netstandard2.0/_._",
         "microsoft.entityframeworkcore.analyzers.5.0.12.nupkg.sha512",
         "microsoft.entityframeworkcore.analyzers.nuspec"
+      ]
+    },
+    "Microsoft.EntityFrameworkCore.InMemory/5.0.12": {
+      "sha512": "bnmyVPMWFM0Olt5K0r2aWhkVb1fg3iiqO12mq786pTHxyjnH40C+GTRG2LS7k69lAPkkuj1iRHkqwN9oJtcqMw==",
+      "type": "package",
+      "path": "microsoft.entityframeworkcore.inmemory/5.0.12",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.dll",
+        "lib/netstandard2.1/Microsoft.EntityFrameworkCore.InMemory.xml",
+        "microsoft.entityframeworkcore.inmemory.5.0.12.nupkg.sha512",
+        "microsoft.entityframeworkcore.inmemory.nuspec"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/5.0.12": {
@@ -8625,6 +8664,11 @@
       "path": "../Worms_lab/Worms_lab.csproj",
       "msbuildProject": "../Worms_lab/Worms_lab.csproj"
     },
+    "Worms_lab.BehaviorLoading/1.0.0": {
+      "type": "project",
+      "path": "../Worms_lab.BehaviorLoading/Worms_lab.BehaviorLoading.csproj",
+      "msbuildProject": "../Worms_lab.BehaviorLoading/Worms_lab.BehaviorLoading.csproj"
+    },
     "Worms_lab.Data/1.0.0": {
       "type": "project",
       "path": "../Worms_Lab.Data/Worms_lab.Data.csproj",
@@ -8643,11 +8687,15 @@
   },
   "projectFileDependencyGroups": {
     "net5.0": [
+      "Microsoft.EntityFrameworkCore.InMemory >= 5.0.12",
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "Moq >= 4.16.1",
       "NUnit >= 3.13.1",
       "NUnit3TestAdapter >= 3.17.0",
       "Worms_lab >= 1.0.0",
+      "Worms_lab.BehaviorLoading >= 1.0.0",
+      "Worms_lab.DBAware >= 1.0.0",
+      "Worms_lab.Data >= 1.0.0",
       "coverlet.collector >= 3.0.2"
     ]
   },
@@ -8682,6 +8730,15 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
+            "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\Worms_lab.BehaviorLoading.csproj": {
+              "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.BehaviorLoading\\Worms_lab.BehaviorLoading.csproj"
+            },
+            "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_Lab.Data\\Worms_lab.Data.csproj": {
+              "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_Lab.Data\\Worms_lab.Data.csproj"
+            },
+            "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.DBAware\\Worms_lab.DBAware.csproj": {
+              "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab.DBAware\\Worms_lab.DBAware.csproj"
+            },
             "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab\\Worms_lab.csproj": {
               "projectPath": "C:\\Users\\vlada\\source\\repos\\WormsSolution\\Worms_lab\\Worms_lab.csproj"
             }
@@ -8698,6 +8755,10 @@
       "net5.0": {
         "targetAlias": "net5.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.InMemory": {
+            "target": "Package",
+            "version": "[5.0.12, )"
+          },
           "Microsoft.NET.Test.Sdk": {
             "target": "Package",
             "version": "[16.9.4, )"

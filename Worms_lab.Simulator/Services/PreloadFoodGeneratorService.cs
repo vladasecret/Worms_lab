@@ -25,6 +25,10 @@ namespace Worms_lab.Simulator.Services
             return food;
         }
 
+        public void setStepNum(int num)      //for tests only
+        {
+            stepNum = num;
+        }
         
     }
 }

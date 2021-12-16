@@ -1,7 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 
-namespace WormsTest
+namespace WormsTest.SimulatorTests
 {
     class FoodGeneratorTests
     {
